@@ -2144,7 +2144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f6091b4331e0c459bd28ad8b7e36b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _menuType: 0
 --- !u!114 &839158665
 MonoBehaviour:
   m_ObjectHideFlags: 0

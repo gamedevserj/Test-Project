@@ -4,18 +4,13 @@ public class Menu : MonoBehaviour
 {
     private Animator animator;
 
-    public void Switch(bool on)
+    public void Initialize()
     {
-        //gameObject.SetActive(on);
-        CheckIfHasAnimator();
-        animator.SetBool("IsVisible", on);
+        animator = GetComponent<Animator>();
     }
 
-    void CheckIfHasAnimator()
+    public void Switch(bool on)
     {
-        if (animator != null)
-            return;
-
-        animator = GetComponent<Animator>();
+        animator.SetBool("IsVisible", on);
     }
 }

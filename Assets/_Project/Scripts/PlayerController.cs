@@ -2,37 +2,33 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float jumpForce= 100;
     private Transform tr;
-    private Direction direction;
-    private enum EnemyState { Idle, Patrol, Attack }
-    private enum MenuType { MainMenu, Options}
-    [SerializeField] private MenuType _menuType;
+    private Rigidbody2D rb;
 
     private void Awake()
     {
         tr = GetComponent<Transform>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void Move(Vector2 movement)
     {
-        tr.Translate(movement * Time.deltaTime, Space.World);
-        if ((int)direction == 1)
-        {
+        //tr.Translate(movement * Time.deltaTime, Space.World);
+    }
 
-        }
+    public void Jump()
+    {
+        rb.AddForce(Vector2.up * jumpForce);
+    }
 
-        switch (direction)
-        {
-            case Direction.Left: // 
-                break;
-            case Direction.Right: 
-                break;
-            case Direction.Up:
-                break;
-            case Direction.Down:
-                break;
-            default:
-                break;
-        }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
     }
 }

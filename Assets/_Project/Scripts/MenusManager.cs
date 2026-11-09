@@ -26,6 +26,12 @@ public class MenusManager : MonoBehaviour
         menus.Add(MenuType.Options, optionsMenu);
         menus.Add(MenuType.Audio, audioOptionMenu);
         activeMenu = MenuType.MainMenu;
+
+        foreach (var menu in menus)
+        {
+            menu.Value.Initialize();
+        }
+
         menus[activeMenu].Switch(true);
 
         Instance = this;

@@ -10,5 +10,9 @@ public class PlayerInput : MonoBehaviour
         var verticalInput = Input.GetAxis("Vertical");
         controller.Move(new Vector2(horizontalInput, verticalInput));
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            controller.Jump();
+        }
     }
 }

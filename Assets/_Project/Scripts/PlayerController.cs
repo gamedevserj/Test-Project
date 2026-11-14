@@ -1,8 +1,15 @@
+using TMPro;
 using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
     [SerializeField] private float jumpForce= 100;
+    [SerializeField] private GameObject restartMenu;
+    [SerializeField] private TextMeshProUGUI scoreLabel;
+    [SerializeField] private Animator animator;
+
+    private int score;
+
     private Transform tr;
     private Rigidbody2D rb;
 
@@ -10,6 +17,12 @@ public partial class PlayerController : MonoBehaviour
     {
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        var velocityY = rb.linearVelocityY;
+        animator.SetFloat("VelocityY", velocityY);
     }
 
     public void Move(Vector2 movement)
@@ -24,11 +37,13 @@ public partial class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        Time.timeScale = 0;
+        restartMenu.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        score++;
+        scoreLabel.text = score.ToString();
     }
 }

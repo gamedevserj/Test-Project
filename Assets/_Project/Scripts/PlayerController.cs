@@ -7,6 +7,8 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] private GameObject restartMenu;
     [SerializeField] private TextMeshProUGUI scoreLabel;
     [SerializeField] private Animator animator;
+    [SerializeField] private Animator animator2;
+    [SerializeField] private float minVelocityY = -2;
 
     private int score;
 
@@ -23,6 +25,23 @@ public partial class PlayerController : MonoBehaviour
     {
         var velocityY = rb.linearVelocityY;
         animator.SetFloat("VelocityY", velocityY);
+
+
+        var clampedVelocity = Mathf.InverseLerp(minVelocityY, jumpForce, velocityY);
+        clampedVelocity *= 2;
+        clampedVelocity -= 1;
+
+        animator2.SetFloat("Blend", clampedVelocity);
+    }
+
+    private void FixedUpdate()
+    {
+        var velocityY = rb.linearVelocityY;
+        if (velocityY < minVelocityY)
+        {
+            velocityY = minVelocityY;
+        }
+        rb.linearVelocityY = velocityY;
     }
 
     public void Move(Vector2 movement)
@@ -32,7 +51,8 @@ public partial class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        rb.AddForce(Vector2.up * jumpForce);
+        rb.linearVelocityY = 0;
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
